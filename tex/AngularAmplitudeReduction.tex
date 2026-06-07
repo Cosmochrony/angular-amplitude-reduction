@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{doi}
+
+\providecommand{\Sym}{\mathrm{Sym}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Heis}{\mathrm{Heis}}
+\providecommand{\Ihat}{\widehat{I}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+
+\title{Reduction of the Angular Amplitude Observable:
+the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
+\large (internal note, prior to the Weil--BFS computation)}
+\author{Cosmochrony programme --- working note}
+\date{\today}
+
+\begin{document}
+  \maketitle
+
+  \begin{abstract}
+    This internal note fixes the numerical observable for the absolute normalisation of the angular
+    generation split of Q14, \S6~\cite{Beau2026q14}, before any Weil--BFS computation is written.
+    A short Baker--Campbell--Hausdorff reduction identifies the per-step $J_\Pi$-odd $J_3$ component of
+    the metaplectic cascade generator with the oriented symplectic area swept per step --- the central,
+    Carnot-degree-2 increment of $\Heis_3$ --- and not with a free shear parameter.
+    The quantity to be measured is therefore the accumulated oriented $J_3$-odd area along the Weil--BFS
+    cascade, normalised by the projected capacity $\Ihat(n)$; at the intrinsic saturation rank
+    $n_3^{\mathrm{obs}}$ this equals $\varepsilon_{\mathrm{Weil}}(n_3^{\mathrm{obs}})$, to be compared
+    with the dictionary value $\varepsilon = \tfrac{1}{10}$ \emph{without fitting}.
+    In the O12 construction the two sectors are the two terms of the fingerprint exponent: the frequency
+    $B_c$ carries the radial capacity $\sigma_c$, the central phase $A_c$ carries the angular split.
+  \end{abstract}
+
+  \textbf{Keywords:} metaplectic cascade; oriented symplectic area; Heisenberg grading; generation
+  split; Weil representation; projected capacity.
+
+  \section{Context}
+
+    Q14, \S6~\cite{Beau2026q14} establishes the amplitude relation $\varepsilon = \mathcal{N}_{\mathrm{casc}}
+  |\alpha|$ with a factorised architecture: the angular $J_3$ split (metaplectic, norm-preserving) and
+    the radial capacity decay (projective, norm-changing) are Hilbert--Schmidt orthogonal generators
+    coupled only by the cascade arrow, and $\mathcal{N}_{\mathrm{casc}}$ is a pure angular--radial
+    transfer constant.
+    The profile and saturation status of the amplitude are fixed; its absolute value is deferred to the
+    physical normalisation of the metaplectic $J_3$ generator, the shear value $\alpha \simeq 0.156$ being
+    a diagnostic coefficient only.
+    This note fixes the observable that a Weil--BFS computation must measure to test that absolute value;
+    it does not attempt to prove $\varepsilon = \tfrac{1}{10}$.
+
+  \section{Reduction lemma}
+
+    \begin{lemma}[Per-step split is the oriented symplectic area]
+      \label{lem:area}
+      Let the cascade step be the oriented metaplectic product $g = S_X(t)\,S_Y(s)$ acting on the weight
+      space $V = \mathbb{C}^2$ and lifted to $\Sym^2(V)$, with $X, Y$ the horizontal $\mathfrak{sl}(2)$
+      generators and $[X,Y] = 2J_3$.
+      Then, to second Baker--Campbell--Hausdorff order,
+      \[
+        \log\!\big(S_X(t)\,S_Y(s)\big) = tX + sY + \tfrac{ts}{2}\,[X,Y] + O(3),
+      \]
+      and the projection onto the $J_3$ direction is
+      \[
+        \Pi_{J_3}\,\log\!\big(S_X(t)\,S_Y(s)\big) = ts\, J_3 + O(3).
+      \]
+      Hence the per-step $J_\Pi$-odd $J_3$ component is
+      \[
+        \alpha_{\mathrm{step}} = ts = \text{oriented symplectic area swept per cascade step},
+      \]
+      the central (Carnot-degree-2) increment of $\Heis_3$, and not a free shear parameter.
+    \end{lemma}
+
+    \begin{proof}
+      The second-order BCH expansion of $\log(e^{tX}e^{sY})$ gives the stated form, the only second-order
+      term being $\tfrac{ts}{2}[X,Y]$ since $X, Y$ are nilpotent of order two in the lift.
+      With $[X,Y] = 2J_3$ this contributes $\tfrac{ts}{2}\,(2J_3) = ts\,J_3$, while $tX + sY$ carries no
+      $J_3$ component.
+      The dependence on $t$ and $s$ only through the product $ts$ is the oriented-area form: $ts$ is the
+      symplectic area of the ordered step, equal to the central-coordinate increment of the Heisenberg law
+      $(a,b,c)(a',b',c') = (a+a', b+b', c+c'+ab')$.
+    \end{proof}
+
+    \begin{remark}
+      This is the dynamical, $J_\Pi$-odd counterpart of the static result that the covariance
+      $[1:\tfrac12:\tfrac12]$ and its factor $2$ originate in the Carnot-degree-2 weight of the central
+      generator $Z = [X,Y]$~\cite{Beau2026a34}, in the identification with $\Sym^2(V_\rho)$ of~\cite{Beau2026a33}.
+      The static factor is carried by the $J_\Pi$-even Carnot dilation; the split is carried by the
+      $J_\Pi$-odd oriented area, a distinct direction.
+    \end{remark}
+
+  \section{The Weil--BFS observable}
+
+    Lemma~\ref{lem:area} fixes what the computation must measure: not a chosen $\alpha(t,s)$, but the
+    oriented central area actually accumulated by the Weil cascade on
+    $\mathrm{Cay}(\Heis_3(\mathbb{Z}/q\mathbb{Z}), S_q)$.
+    In the O12 construction this area is explicit.
+    Built from the three accumulated generator steps $(a_i, b_i, g_i)$ on the uniform seed, the fingerprint
+    of a shell element $g$ is a single additive character
+    \[
+      \mathrm{fp}_c(g; x) = q^{-3/2}\, \exp\!\Big( \tfrac{2\pi i}{q}\big( A_c(g) + B_c(g)\, x \big) \Big),
+      \qquad
+      B_c(g) = \sum_i c_i\, b_i, \quad
+      A_c(g) = \sum_i c_i\, (g_i - b_i a_i),
+    \]
+    verified single-frequency to machine precision~\cite{Beau2026a35,Beau2026a36}.
+    The two terms of the exponent separate the two sectors exactly:
+    \[
+      B_c \ \text{(frequency)} = \text{radial / capacity},
+      \qquad
+      A_c \ \text{(central phase)} = \text{angular} / J_3 .
+    \]
+    The radial capacity is the frequency-counting functional
+    \[
+      \sigma_c(n) = \frac{|\{ B_c(g) : g \in S_n \}|}{|S_n|},
+    \]
+    blind to $A_c$: scaling the whole block $c \mapsto \omega c$ permutes $B_c \mapsto \omega B_c$
+    bijectively and leaves $\sigma_c$ invariant ($[H\text{-color}]$), while $A_c \mapsto \omega A_c$ carries
+    the per-vector phase that Gram--Schmidt discards.
+    The angular increment is therefore the $J_\Pi$-odd, oriented shell increment of the central phase
+    $A_c$,
+    \[
+      \Delta A_{J_3}^{\mathrm{odd}}(n)
+      = \operatorname{Odd}_{J_\Pi}\big[\, \text{oriented shell increment of } A_c(g),\ g \in S_n \,\big],
+    \]
+    where $\operatorname{Odd}_{J_\Pi}$ is the part odd under conjugation $c \mapsto q-c$ and the orientation
+    is the cascade arrow.
+    Define
+    \[
+      \varepsilon_{\mathrm{Weil}}(n) = \sum_{m \le n} \Delta A_{J_3}^{\mathrm{odd}}(m),
+      \qquad
+      K_{\mathrm{ar}}^{\mathrm{Weil}}(n) = \frac{\varepsilon_{\mathrm{Weil}}(n)}{\Ihat(n)},
+      \qquad
+      \Ihat(n) = \frac{\sigma_{\mathrm{pair}}(0) - \sigma_{\mathrm{pair}}(n)}
+      {\sigma_{\mathrm{pair}}(0) - \sigma_{\mathrm{pair}}(n_{\mathrm{sat}})} ,
+    \]
+    with $\sigma_{\mathrm{pair}} = \sigma_c\, \sigma_{q-c}$.
+    Since $\Ihat(n_3^{\mathrm{obs}}) = 1$ at the intrinsic saturation rank~\cite{Beau2026a23}, the quantity
+    to be compared with the dictionary value is
+    \[
+      K_{\mathrm{ar}}^{\mathrm{Weil}}(n_3^{\mathrm{obs}}) = \varepsilon_{\mathrm{Weil}}(n_3^{\mathrm{obs}}) .
+    \]
+    This eliminates the principal false positive: no shear parameters are chosen; the radial sector is the
+    frequency count of $B_c$ and the angular sector is the central phase $A_c$, separated by the form of the
+    fingerprint itself.
+
+  \section{Required outputs and honest outcomes}
+
+    The Weil--BFS computation must return three quantities, not one:
+    \begin{enumerate}
+      \item $K_{\mathrm{ar}}^{\mathrm{Weil}}(q)$ at the saturation rank, for $q \in \{61, 101, 151\}$;
+      \item the profile $K_{\mathrm{ar}}^{\mathrm{Weil}}(n)$ (constant / saturating / $n_3$-concentrated),
+      cross-checking the locking law of Q14, \S6;
+      \item the sign control under cascade reversal: the $J_3$-odd component must flip sign, as required by
+      the oriented arrow.
+    \end{enumerate}
+    The comparison is $K_{\mathrm{ar}}^{\mathrm{Weil}}(q) \to \tfrac{1}{10}$, tested, not fitted.
+    The honest outcomes are:
+    $K_{\mathrm{ar}}^{\mathrm{Weil}} \to \tfrac{1}{10}$ is an orthogonal confirmation of $\varepsilon$
+    (the ADE-deficit radial route and the metaplectic-area angular route agree);
+    $K_{\mathrm{ar}}^{\mathrm{Weil}} \neq \tfrac{1}{10}$ but $q$-stable means the ADE dictionary fixes
+    $\varepsilon$ while the angular sector carries an additional transfer factor, with the common scale
+    $\kappa = \tfrac{5}{12}$ of the deficit dictionary a natural candidate;
+    $K_{\mathrm{ar}}^{\mathrm{Weil}}$ $q$-unstable leaves the amplitude open.
+
+  \section{The deferred normalisation $A \to \varepsilon$}
+
+    The fingerprint gives a concrete angle per element, $\theta_A(g) = 2\pi A_c(g)/q$.
+    The angular amplitude is then
+    \[
+      \varepsilon_{\mathrm{Weil}}
+      = \mathcal{N}_A \cdot
+      \operatorname{Odd}_{J_\Pi}\!\Big( \tfrac{2\pi A_c}{q} \Big)_{\Ihat\text{-normalised}} ,
+    \]
+    where $\mathcal{N}_A$ is not a fit to $\tfrac{1}{10}$ but the geometric factor converting a Weil central
+    phase into the spectral coefficient of the $J_3$ generator on $\Sym^2(V_\rho)$.
+    It is the angular analogue of the radial scale $\kappa = \tfrac{5}{12}$ of the deficit dictionary.
+    This is the last open step, and it is posed only after the observable above is fixed, so that
+    $\mathcal{N}_A$ acts on the concrete pipeline quantity $\theta_A$ rather than on an abstract area.
+
+    \bibliographystyle{plain}
+    \bibliography{cosmochrony-bibliography}
+
+\end{document}

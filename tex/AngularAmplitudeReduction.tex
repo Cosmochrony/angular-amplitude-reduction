@@ -182,6 +182,55 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
     This is the last open step, and it is posed only after the observable above is fixed, so that
     $\mathcal{N}_A$ acts on the concrete pipeline quantity $\theta_A$ rather than on an abstract area.
 
+  \section{Symmetric-capacity obstruction}
+
+    The preceding definition deliberately separates the radial and angular observables.
+    The radial observable is the frequency count of $B_c$, while the angular observable is
+    the central phase $A_c$.
+    A direct Weil--BFS evaluation on symmetric shells gives a useful obstruction rather
+    than an amplitude value.
+
+    On the symmetric BFS shell $S_n$, the involution $g\mapsto g^{-1}$ pairs opposite
+    central phases.
+    Consequently the oriented $J_\Pi$-odd average of the phase $A_c$ cancels:
+    \[
+      \Theta_{\mathrm{raw}}(n)
+      =
+      \operatorname{Odd}_{J_\Pi}
+      \left(
+        \frac{2\pi A_c}{q}
+      \right)_{S_n}
+      =
+      0 .
+    \]
+    This cancellation is exact at the shell level.
+    It does not mean that the phase $A_c$ is trivial; rather, it means that the symmetric
+    capacity observable contains both orientations and therefore erases the oriented
+    angular component.
+
+    The numerical Weil--BFS check confirms this structure for
+    $q\in\{61,101,151\}$.
+    The radial profile $\sigma_{\mathrm{pair}}(n)$ is non-trivial and saturates through the
+    frequency sector $B_c$, while the raw angular profile
+    $\Theta_{\mathrm{Weil}}(n)$ vanishes identically before any orientation prescription is
+    introduced.
+
+    This is the angular analogue of the static obstruction in Q14.
+    The symmetric capacity data determine the radial projection sector, but they do not
+    select an oriented branch of the metaplectic cascade.
+    Therefore the missing ingredient is not first the normalisation
+    $\mathcal{N}_A$, but the orientation prescription itself.
+    Only after an oriented Q11 cascade branch is specified does it make sense to ask for the
+    geometric conversion factor
+    \[
+      \varepsilon_{\mathrm{Weil}}
+      =
+      \mathcal{N}_A\,
+      \Theta_{\mathrm{oriented}} .
+    \]
+    In particular, no value of $\mathcal{N}_A$ can turn the symmetric-shell result into a
+    non-zero generation split, since the quantity to be normalised is exactly zero.
+
     \bibliographystyle{plain}
     \bibliography{cosmochrony-bibliography}
 

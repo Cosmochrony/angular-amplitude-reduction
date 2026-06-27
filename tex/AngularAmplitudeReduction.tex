@@ -236,6 +236,56 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
     In particular, no value of $\mathcal{N}_A$ can turn the symmetric-shell result into a
     non-zero generation split, since the quantity to be normalised is exactly zero.
 
+    \subsection{Capacity audit: symmetric obstruction and the onset angular coefficient}
+      \label{subsec:capacity-audit}
+
+      The required-outputs computation has been run on the exact Weil-block pipeline for
+      $q\in\{61,101,151,211,307\}$, with two firm outcomes and no fit.
+
+      First, the signed oriented area vanishes identically.
+      The symmetric shell average gives $\Theta_{\mathrm{raw}}=0$ (Section~\ref{sec:sym-cap-obstruction}), and the
+      directed outgoing-frontier signed mean is also zero, $\langle\Delta A_c\rangle_{\partial^+}=0$, with the
+      symmetrised anti-bias control $\langle\Delta A_c\rangle_{\partial^+\cup\partial^-}=0$ and a consistent sign
+      reversal.
+      The capacity data alone therefore do not select an oriented branch.
+
+      Second, the absolute directed-frontier increment is a $q$-independent exact rational sequence.
+      With $c=1$, the per-shell mean $\langle|\Delta A_c|\rangle_{\partial^+}(m)$, computed by integer arithmetic, is
+      identical for all five primes:
+      \[
+        \big(\langle|\Delta A_c|\rangle_{\partial^+}(m)\big)_{m\ge 1}
+        = \Big( \tfrac13,\ \tfrac59,\ \tfrac23,\ \tfrac{10}{11},\ \tfrac{119}{109},\ \tfrac{239}{185},\ \dots \Big).
+      \]
+      The saturation-onset value is exactly $\tfrac13$, so the maximal-locking angular bound is closed exactly --- an
+      onset coefficient, not a loose bound,
+      \[
+        \theta_{\max}
+        = \frac{2\pi}{q}\,\langle|\Delta A_c|\rangle_{\partial^+}\big|_{\mathrm{onset}}
+        = \frac{2\pi}{3q},
+      \]
+      exact and $q$-independent in the coefficient $\tfrac13$.
+
+      This closes the angular coefficient but not the amplitude.
+      Since $\theta_{\max}\to 0$ with $q$, it is not the dictionary value $\varepsilon=\tfrac1{10}$: the latter would
+      require the geometric $\Sym^2$ normalisation
+      \[
+        \mathcal{N}_A^{\mathrm{geom}}
+        = \frac{1/10}{\theta_{\max}}
+        = \frac{3q}{20\pi},
+      \]
+      the deferred conversion factor of the preceding section, which the capacity data do not supply.
+      The audit therefore derives the angular coefficient $\tfrac13$ but leaves $\varepsilon=\tfrac1{10}$ gated by the
+      geometric normalisation --- the orientation lock being itself conditional on the inherited central-phase
+      branch~\cite{Beau2026cho}, and the residual value gated by the same type-rigidity as the spectral
+      gate~\cite{Beau2026aog}.
+
+      \paragraph{Reproducibility.}
+      The audit is exact: integer arithmetic for the frontier rational sequence, no fit.
+      The consolidator \texttt{simulation/fermionic-matter/front\_NA\_capacity\_audit.py} runs the two campaign
+      backends \texttt{q11\_oriented\_frontier.py} (directed signal and the maximal-locking bound) and
+      \texttt{weil\_bfs\_angular\_area.py} (symmetric area) on the \texttt{spectral\_O12} pipeline, and prints the
+      obstruction table together with the $q$-independent exact per-shell rationals.
+
     \bibliographystyle{plain}
     \bibliography{cosmochrony-bibliography}
 

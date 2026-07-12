@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you cite this work, please use the metadata from this file."
+title: "Reduction of the Angular Amplitude Observable: the J_3 Split as Accumulated Oriented Symplectic Area (internal note, prior to the Weil–BFS computation)"
+type: software
+authors:
+  - family-names: "Beau"
+    given-names: "Jérôme"
+repository-code: "https://github.com/Cosmochrony/angular-amplitude-reduction"
+url: "https://cosmochrony.org/science/fermionic-matter/angular-amplitude-reduction/"
+doi: "10.5281/zenodo.20601228"
+license: "CC-BY-4.0"
+preferred-citation:
+  type: article
+  title: "Reduction of the Angular Amplitude Observable: the J_3 Split as Accumulated Oriented Symplectic Area (internal note, prior to the Weil–BFS computation)"
+  authors:
+    - family-names: "Beau"
+      given-names: "Jérôme"
+  year: 2026
+  doi: "10.5281/zenodo.20601228"
+  url: "https://doi.org/10.5281/zenodo.20601228"

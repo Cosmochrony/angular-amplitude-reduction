@@ -135,8 +135,8 @@ def main():
     print("  u (hence R): diag(1,1/2+u,1/2-u) is J_3-aligned for EVERY u, so the representation leaves u free; the")
     print("  value R=3/2 is external dynamical/ADE data. The obstruction is therefore not a missing norm convention")
     print("  but an irreducible ARITHMETIC factor: the prime 5 = 2(R+1)|_{R=3/2}, coprime to the Sym^2 pool {2,3} --")
-    print("  the icosahedral/ADE signature (cf. the sqrt5 of AOG). So Sym^2 does NOT intrinsically convert 1/3 -> 1/10:")
-    print("  front N_A^geom reduces to AOG lem:rigidity, SHARPENED to a single arithmetic object -- R=3/2, i.e. the")
+    print("  the icosahedral/ADE signature (no link to the Galois action sigma of AOG is claimed). So Sym^2 does NOT intrinsically convert 1/3 -> 1/10:")
+    print("  front N_A^geom reduces to the ADE case-selection gate of AOG, SHARPENED to a single arithmetic object -- R=3/2, i.e. the")
     print("  prime 5. The onset coefficient (1/3) and the norm conventions (2,3,sqrt2) are Sym^2; the 5 is the gate.")
     print("ALL CHECKS PASS" if allok else "SOME CHECKS FAILED")
     return allok

@@ -174,7 +174,7 @@ def main():
     print(f" 3. NOT a derivation of eps = 1/10. theta_max -> 0 with q; eps=1/10 would require, at the onset shell, the geometric Sym^2")
     print(f"    normalisation N_A^geom = (1/10)/theta_max^(1) = (1/10)*(3q/2pi) = 3q/(20 pi) -- AAR section 5's 'last")
     print("    open step', NOT supplied by the capacity data. The onset coefficient is 1/3; the")
-    print("    geometric normalisation is not. eps=1/10 stays gated, consistent with AOG lem:rigidity.")
+    print("    geometric normalisation is not. eps=1/10 stays a theorem modulo the ADE case-selection gate (AOG), whose status is not settled here.")
     print("=" * 104)
     return rows
 

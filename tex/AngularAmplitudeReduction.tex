@@ -26,21 +26,25 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
   \begin{abstract}
     This internal note fixes the numerical observable for the absolute normalisation of the angular
     generation split of Q14, \S6~\cite{Beau2026q14}, before any Weil--BFS computation is written.
-    A short Baker--Campbell--Hausdorff reduction identifies the per-step $J_\Pi$-odd $J_3$ component of
-    the metaplectic cascade generator with the oriented symplectic area swept per step --- the central,
-    Carnot-degree-2 increment of $\Heis_3$ --- and not with a free shear parameter.
-    The quantity to be measured is therefore the accumulated oriented $J_3$-odd area along the Weil--BFS
-    cascade, normalised by the projected capacity $\Ihat(n)$; at the intrinsic saturation rank
-    $n_3^{\mathrm{obs}}$ this equals $\varepsilon_{\mathrm{Weil}}(n_3^{\mathrm{obs}})$, to be compared
-    with the dictionary value $\varepsilon = \tfrac{1}{10}$ \emph{without fitting}.
+    A short Baker--Campbell--Hausdorff reduction in $\mathfrak{sl}_2$ identifies the per-step $J_\Pi$-odd $J_3$
+    component of the metaplectic cascade generator with the oriented product $ts$ of the two shear parameters,
+    produced by the $\mathfrak{sl}_2$ commutator $[E,F]=H$ (Q14, Proposition~6.5), and not with a free shear
+    parameter; the Heisenberg bracket does not enter.
+    The observable proposed for the Weil--BFS cascade is the accumulated oriented central-phase increment
+    $A_c$ of the Heisenberg lift, normalised by the projected capacity $\Ihat(n)$.
+    That $A_c$ carries the $J_3$ signal is an input of this note, not a consequence of the reduction: the
+    increment $ts$ and the Heisenberg cocycle have the same form, which is an analogy and not an identification.
+    Under this input, at the intrinsic saturation rank
+    $n_3^{\mathrm{obs}}$ the normalised increment equals $\varepsilon_{\mathrm{Weil}}(n_3^{\mathrm{obs}})$, to be
+    compared with the dictionary value $\varepsilon = \tfrac{1}{10}$ \emph{without fitting}.
     In the O12 construction the two sectors are the two terms of the fingerprint exponent: the frequency
-    $B_c$ carries the radial capacity $\sigma_c$, the central phase $A_c$ carries the angular split.
+    $B_c$ carries the radial capacity $\sigma_c$, the central phase $A_c$ is, under that input, the carrier of the angular split.
     A direct evaluation on symmetric BFS shells returns $\Theta_{\mathrm{raw}}=0$ identically: the
     symmetric capacity data fix the radial sector but cannot select an oriented angular branch, so the
     orientation prescription is an irreducible input prior to $\mathcal{N}_A$.
   \end{abstract}
 
-  \textbf{Keywords:} metaplectic cascade; oriented symplectic area; Heisenberg grading; generation
+  \textbf{Keywords:} metaplectic cascade; oriented symplectic area; $\mathfrak{sl}_2$ commutator; generation
   split; Weil representation; projected capacity.
 
   \section{Context}
@@ -61,11 +65,11 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
     \begin{lemma}[Per-step split is the oriented symplectic area]
       \label{lem:area}
       Let the cascade step be the oriented metaplectic product $g = S_X(t)\,S_Y(s)$ acting on the weight
-      space $V = \mathbb{C}^2$ and lifted to $\Sym^2(V)$, with $X, Y$ the horizontal $\mathfrak{sl}(2)$
-      generators and $[X,Y] = 2J_3$.
+      space $V = \mathbb{C}^2$ and lifted to $\Sym^2(V)$, with $S_X(t)=e^{tE}$, $S_Y(s)=e^{sF}$ and $E,F$ the
+      horizontal shear generators of $\mathfrak{sl}(2)$, $[E,F] = H$, whose image on $\Sym^2(V)$ is $2J_3$.
       Then, to second Baker--Campbell--Hausdorff order,
       \[
-        \log\!\big(S_X(t)\,S_Y(s)\big) = tX + sY + \tfrac{ts}{2}\,[X,Y] + O(3),
+        \log\!\big(S_X(t)\,S_Y(s)\big) = tE + sF + \tfrac{ts}{2}\,[E,F] + O(3),
       \]
       and the projection onto the $J_3$ direction is
       \[
@@ -73,35 +77,44 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
       \]
       Hence the per-step $J_\Pi$-odd $J_3$ component is
       \[
-        \alpha_{\mathrm{step}} = ts = \text{oriented symplectic area swept per cascade step},
+        \alpha_{\mathrm{step}} = ts = \text{oriented product of the two shear parameters of the ordered step},
       \]
-      the central (Carnot-degree-2) increment of $\Heis_3$, and not a free shear parameter.
+      to leading order, and not a free shear parameter; its exact value is $ts\,\theta/\sinh\theta$ with
+      $\cosh\theta = 1 + ts/2$ (Q14, Proposition~6.5).
     \end{lemma}
 
     \begin{proof}
-      The second-order BCH expansion of $\log(e^{tX}e^{sY})$ gives the stated form, the only second-order
-      term being $\tfrac{ts}{2}[X,Y]$ since $X, Y$ are nilpotent of order two in the lift.
-      With $[X,Y] = 2J_3$ this contributes $\tfrac{ts}{2}\,(2J_3) = ts\,J_3$, while $tX + sY$ carries no
+      The second-order BCH expansion of $\log(e^{tE}e^{sF})$ gives the stated form, its second-order
+      term being $\tfrac{ts}{2}[E,F]$.
+      With $[E,F] = H \mapsto 2J_3$ this contributes $\tfrac{ts}{2}\,(2J_3) = ts\,J_3$, while $tE + sF$ carries no
       $J_3$ component.
-      The dependence on $t$ and $s$ only through the product $ts$ is the oriented-area form: $ts$ is the
-      symplectic area of the ordered step, equal to the central-coordinate increment of the Heisenberg law
-      $(a,b,c)(a',b',c') = (a+a', b+b', c+c'+ab')$.
+      The $J_3$ coefficient therefore comes from the $\mathfrak{sl}_2$ commutator, and the dependence on $t$ and $s$
+      only through the product $ts$ is the oriented form of the ordered step.
+      The product $ts$ has the form of the central increment $ab'$ of the Heisenberg law
+      $(a,b,c)(a',b',c') = (a+a', b+b', c+c'+ab')$; this is a formal analogy, and the Heisenberg bracket does not
+      produce the $J_3$ coefficient (Q14, Proposition~6.5).
     \end{proof}
 
     \begin{remark}
-      This is the dynamical, $J_\Pi$-odd counterpart of the static result that the covariance
-      $[1:\tfrac12:\tfrac12]$ and its factor $2$ originate in the Carnot-degree-2 weight of the central
-      generator $Z = [X,Y]$~\cite{Beau2026a34}, in the identification with $\Sym^2(V_\rho)$ of~\cite{Beau2026a33}.
+      The static result that the covariance $[1:\tfrac12:\tfrac12]$ and its factor $2$ originate in the
+      Carnot-degree-2 weight of the central generator $Z$ of $\Heis_3$~\cite{Beau2026a34}, in the identification
+      with $\Sym^2(V_\rho)$ of~\cite{Beau2026a33}, is a statement about the Heisenberg bracket.
+      The reduction above is not its dynamical counterpart: the $J_3$ coefficient of the step comes from the
+      $\mathfrak{sl}_2$ commutator $[E,F]=H$, and no map between the two brackets is supplied here.
       The static factor is carried by the $J_\Pi$-even Carnot dilation; the split is carried by the
-      $J_\Pi$-odd oriented area, a distinct direction.
+      $J_\Pi$-odd oriented product $ts$, a distinct direction.
     \end{remark}
 
   \section{The Weil--BFS observable}
 
-    Lemma~\ref{lem:area} fixes what the computation must measure: not a chosen $\alpha(t,s)$, but the
-    oriented central area actually accumulated by the Weil cascade on
-    $\mathrm{Cay}(\Heis_3(\mathbb{Z}/q\mathbb{Z}), S_q)$.
-    In the O12 construction this area is explicit.
+    Lemma~\ref{lem:area} identifies the per-step $J_3$ signal with the oriented shear product $ts$ of
+    $\mathfrak{sl}_2$.
+    The computation below measures instead the oriented central-phase increment actually accumulated by the Weil
+    cascade on $\mathrm{Cay}(\Heis_3(\mathbb{Z}/q\mathbb{Z}), S_q)$, a Heisenberg quantity of the same form as $ts$.
+    That this increment is the observable of the $J_3$ signal is an input of this note and not a consequence of
+    the lemma: every statement below about $A_c$ is exact for $A_c$, and its reading as the $J_3$ split is
+    conditional on that input.
+    In the O12 construction the central phase is explicit.
     Built from the three accumulated generator steps $(a_i, b_i, g_i)$ on the uniform seed, the fingerprint
     of a shell element $g$ is a single additive character
     \[
@@ -111,7 +124,8 @@ the $J_3$ Split as Accumulated Oriented Symplectic Area\\[2pt]
       A_c(g) = \sum_i c_i\, (g_i - b_i a_i),
     \]
     verified single-frequency to machine precision~\cite{Beau2026a35,Beau2026a36}.
-    The two terms of the exponent separate the two sectors exactly:
+    The two terms of the exponent separate a radial and a central-phase sector exactly, the latter being the
+    angular sector under the input above:
     \[
       B_c \ \text{(frequency)} = \text{radial / capacity},
       \qquad

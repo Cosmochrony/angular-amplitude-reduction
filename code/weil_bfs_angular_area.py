@@ -5,11 +5,11 @@ weil_bfs_angular_area.py  (A+Bx conventions, aligned with spectral_O12 / o32)
 Measures, on the O12 single-character fingerprint
     fp_c(g; x) = q^{-3/2} exp( 2pi i (A_c(g) + B_c(g) x) / q ),
     B_c(g) = sum_i c_i b_i               (frequency  -> radial / capacity)
-    A_c(g) = sum_i c_i (g_i - b_i a_i)    (central phase -> angular / J_3)
+    A_c(g) = sum_i c_i (g_i - b_i a_i)    (central phase -> angular / J_3, under the A_c input of AAR: not a consequence of AAR lem:area)
 the two factorised observables of AngularAmplitudeReduction:
 
   RADIAL  (capacity):  sigma_c(n)    = |{ B_c(g) : g in shell n }| / |S_n|
-  ANGULAR (J_3 split): Theta_Weil(n) = Odd_{J_Pi}( 2pi A_c / q )  Ihat-normalised
+  ANGULAR (J_3 split, under the A_c input): Theta_Weil(n) = Odd_{J_Pi}( 2pi A_c / q )  Ihat-normalised
 
 with  Ihat(n) = (sigma_pair(0)-sigma_pair(n)) / (sigma_pair(0)-sigma_pair(n_sat)),
       sigma_pair = sigma_c * sigma_{q-c},  n_sat = n_3^obs.

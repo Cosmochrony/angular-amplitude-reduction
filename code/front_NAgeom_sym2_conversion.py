@@ -57,8 +57,26 @@ def main():
     checks["2_eps_of_R"] = sp.simplify(eps_of_R - (R - 1) / (2 * (R + 1))) == 0
     out["eps_of_R"] = sp.nsimplify(eps_of_R)
     # shear-product->J_3 conversion factor is 1 (AAR lem:area): the J_3 coefficient is ts to leading order.
-    area_to_J3 = sp.Integer(1)
-    checks["2_shear_product_to_J3_is_unity"] = (area_to_J3 == 1)
+    # Real check: build d(Sym^2) on the basis (x^2, xy, y^2) for E=[[0,1],[0,0]], F=[[0,0],[1,0]], H=[E,F], and verify
+    # [dE,dF]=dH=2*diag(1,0,-1) (rep property), hence the second-order BCH term (ts/2)[dE,dF] = ts*J_3 (J_3=diag(1,0,-1)).
+    def dsym2(M):
+        x, y = sp.symbols("x y")
+        basis = [x**2, x*y, y**2]
+        # derivation induced by the linear substitution x -> M00 x + M10 y, y -> M01 x + M11 y (x,y = coordinates on V*)
+        act = lambda p: sp.expand((M[0, 0]*x + M[1, 0]*y)*sp.diff(p, x) + (M[0, 1]*x + M[1, 1]*y)*sp.diff(p, y))
+        cols = []
+        for b in basis:
+            r = act(b)
+            cols.append([sp.Poly(r, x, y).coeff_monomial(m) for m in basis])
+        return sp.Matrix(cols).T
+    Em, Fm = sp.Matrix([[0, 1], [0, 0]]), sp.Matrix([[0, 0], [1, 0]])
+    Hm = Em*Fm - Fm*Em
+    dE, dF, dH = dsym2(Em), dsym2(Fm), dsym2(Hm)
+    t, s_ = sp.symbols("t s")
+    area_to_J3 = sp.simplify(((t*s_/2)*(dE*dF - dF*dE))[0, 0] / (t*s_ * J3b[0, 0]))
+    checks["2_shear_product_to_J3_is_unity"] = ((dE*dF - dF*dE) == dH and dH == 2*J3b
+                                                and sp.simplify((t*s_/2)*(dE*dF - dF*dE) - t*s_*J3b) == sp.zeros(3, 3)
+                                                and area_to_J3 == 1)
 
     # ---- Step 3: the reduced residue and where R=3/2 enters --------------------------------------
     onset = sp.Rational(1, 3)                              # exact frontier onset <|Delta A_c|>_d+ (Front N_A)

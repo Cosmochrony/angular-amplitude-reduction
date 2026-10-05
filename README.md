@@ -1,4 +1,4 @@
-# Angular Amplitude Reduction — the Oriented Shear Product of the $\mathfrak{sl}_2$ Step and the Central-Phase Observable of the Weil Cascade
+# Angular Amplitude Reduction — the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade
 
 J. Beau, Independent Researcher, France
 

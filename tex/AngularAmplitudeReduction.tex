@@ -278,7 +278,7 @@ and the Central-Phase Observable of the Weil Cascade}
       reversal.
       The capacity data alone therefore do not select an oriented branch.
 
-      Second, the absolute directed-frontier increment is an exact rational sequence, $q$-independent over the first six shells (see the paragraph on reproducibility below).
+      Second, the absolute directed-frontier increment is an exact rational sequence, $q$-independent over the first six shells for $q\in\{61,101,151,211,307\}$ (see the paragraph on reproducibility below).
       With $c=1$, the per-shell mean $\langle|\Delta A_c|\rangle_{\partial^+}(m)$, computed by integer arithmetic, is
       identical for all five primes:
       \[
@@ -295,7 +295,7 @@ and the Central-Phase Observable of the Weil Cascade}
       The $\Ihat$-normalised bound at $n_3^{\mathrm{obs}}=2$ printed by the campaign script is $2.114/q$, $2.122/q$,
       $2.118/q$ for $q=61,101,151$ ($0.9$--$1.3\,\%$ above the onset value, because it weights the second shell
       $\tfrac59$ by $\Delta\Ihat(2)$), so $\tfrac13$ is an onset coefficient, not the value of the normalised bound at
-      $n_3^{\mathrm{obs}}$; it is exact and $q$-independent in the onset coefficient $\tfrac13$.
+      $n_3^{\mathrm{obs}}$; it is exact and $q$-independent (first shell, $q\in\{61,101,151,211,307\}$) in the onset coefficient $\tfrac13$.
       This exact coefficient is a result of the standard $\{\pm X,\pm Y\}$ Cayley-frontier convention, not a
       generator-set invariant.
       Changing the horizontal generating set changes the onset rational, so the onset coefficient $\tfrac13$ should be
@@ -320,8 +320,9 @@ and the Central-Phase Observable of the Weil Cascade}
 
       \paragraph{Reproducibility.}
       The per-shell rationals above are exact integer arithmetic in $\mathrm{Heis}_3(\mathbb{Z})$ and in
-      $\mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$, with no fit; for $q\ge 61$ the ball of radius $7$ of the Cayley graph
-      embeds in $\mathrm{Heis}_3(\mathbb{Z})$, which is why the sequence is $q$-independent over the first six shells.
+      $\mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$, with no fit; for $q\ge 61$ the ball of radius $7$ of the Cayley graph of
+      $\mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$ is isomorphic to that of $\mathrm{Heis}_3(\mathbb{Z})$ (its first six shells are recomputed at the five primes
+      above), which is why the sequence is $q$-independent over the first six shells on that domain only.
       They are recomputed from this repository alone by \texttt{code/frontier\_exact.py} (standard library only).
       The vanishing of the symmetric-shell average (Section~\ref{sec:sym-cap-obstruction}) is reproduced by
       \texttt{code/weil\_bfs\_angular\_area.py}, and the onset $\tfrac13$, its generator-set dependence and the

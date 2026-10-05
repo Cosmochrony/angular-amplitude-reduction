@@ -4,15 +4,16 @@ front_NA_capacity_audit.py
 
 Front N_A: does the Weil-BFS / projected-capacity pipeline yield N_A = epsilon = 1/10 WITHOUT FITTING?
 
-This is a thin CONSOLIDATOR over the two existing campaign backends (no new physics, no fit):
+This is a thin CONSOLIDATOR over the two existing campaign backends (no new physics, no fit), both in this directory:
   - q11_oriented_frontier.py   -> directed outgoing-frontier signal and the maximal-locking bound theta_max
-  - weil_bfs_angular_area.py   -> the symmetric-shell oriented area Theta_raw (the obstruction baseline)
+                                  (vendored copy of the Q11OF repository script)
+  - weil_bfs_angular_area.py   -> the symmetric-shell central-phase mean Theta_raw (the obstruction baseline)
 
 It executes the AAR "required outputs and honest outcomes" programme for q in {61, 101, 151} and classifies the
 result into AAR's four honest outcomes, WITHOUT ever fitting to 1/10.
 
-Run (real pipeline):
-  PYTHONPATH=../spectral/o12 python3 front_NA_capacity_audit.py
+Run (from this directory, or from anywhere; no external module, about 2.5 min):
+  python3 front_NA_capacity_audit.py
 
 GUARDRAILS (inherited from both backends): the value 1/10 is used ONLY as a comparison target printed at the end;
 no quantity is ever rescaled to hit it. theta_max is the maximal-locking BOUND on |Theta_chi|, a structural upper
@@ -20,20 +21,18 @@ bound attained only under the CHO [H-orient] sigma_L lock; it is NOT an amplitud
 needs the geometric Sym^2 normalisation N_A^geom, which the capacity data do not supply (AAR section 5).
 """
 
-import importlib.util
 import math
+import os
+import sys
 from fractions import Fraction
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import q11_oriented_frontier as q11          # noqa: E402  (local, importable by name: Pool can pickle its workers)
+import weil_bfs_angular_area as wb           # noqa: E402
 
 EPS_DICT = Fraction(1, 10)
 Q_LIST = [61, 101, 151, 211, 307]
 TWO_PI = 2.0 * math.pi
-
-
-def _load(modname, path):
-    spec = importlib.util.spec_from_file_location(modname, path)
-    m = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(m)
-    return m
 
 
 def _signed(v, q):
@@ -43,7 +42,7 @@ def _signed(v, q):
 def onset_generator_dependence(q=61):
     """Shell-1 onset <|Delta A_c|>_d+ for several symmetric generating sets of Heis_3(Z/qZ).
 
-    Demonstrates that the closed onset 1/3 is the standard {+-X,+-Y} Cayley-frontier convention, NOT a
+    Demonstrates that the first-shell (onset) value 1/3 is the standard {+-X,+-Y} Cayley-frontier convention, NOT a
     generator-set invariant (and a fortiori not a generation-count / Sym^2-dimension invariant): changing the
     horizontal generating set changes the onset rational. Exact integer arithmetic (Fraction)."""
     from collections import deque
@@ -87,7 +86,7 @@ def onset_generator_dependence(q=61):
     return {name: onset(gens) for name, gens in sets.items()}
 
 
-def frontier_abs_dAc_exact(q11, q, mmax=6):
+def frontier_abs_dAc_exact(q, mmax=6):
     """EXACT (rational) per-shell directed-frontier mean |Delta A_c| over the outgoing edges d+.
 
     This is the bare per-shell increment underlying theta_max = (2pi/q) <|Delta A_c|>_{d+}; computed with
@@ -109,15 +108,13 @@ def frontier_abs_dAc_exact(q11, q, mmax=6):
 
 
 def main():
-    q11 = _load("q11f", "q11_oriented_frontier.py")
-    wb = _load("wb", "weil_bfs_angular_area.py")
-    q11.N_WORKERS = 1                                       # serial: dynamic-module workers cannot be pickled
+    q11.N_WORKERS = 1                                       # serial
     wb.N_WORKERS = 1
 
     # (i) EXACT per-shell directed-frontier sequence -- frontier only, no blocks/Pool: all q
-    rows = [{"q": q, "seq": frontier_abs_dAc_exact(q11, q)} for q in Q_LIST]
+    rows = [{"q": q, "seq": frontier_abs_dAc_exact(q)} for q in Q_LIST]
 
-    # (ii) obstruction confirmation (signed=0, anti-bias=0, symmetric area vanishes) on checkpointed q only
+    # (ii) obstruction confirmation (signed=0, anti-bias=0, symmetric central-phase mean vanishes) on checkpointed q only
     obstruction = []
     for q in [61, 101, 151]:
         a = q11.run_q(q)
@@ -130,10 +127,10 @@ def main():
         })
 
     print("=" * 104)
-    print("FRONT N_A -- capacity-pipeline audit (real pipeline, exact rationals, no fit). AAR required outputs.")
+    print("FRONT N_A -- capacity-pipeline audit (exact rationals, no fit). AAR required outputs.")
     print("=" * 104)
-    print("Obstruction (signed oriented area), checkpointed q:")
-    print(f"  {'q':>4} | {'signed |<dAc>_d+|':>16} | {'anti-bias':>9} | {'symmetric area':>20}")
+    print("Obstruction (signed central-phase increment), checkpointed q:")
+    print(f"  {'q':>4} | {'signed |<dAc>_d+|':>16} | {'anti-bias':>9} | {'symmetric mean':>20}")
     for o in obstruction:
         print(f"  {o['q']:>4} | {o['signed_plus_raw_max']:>16.2e} | {o['antibias_sym_max']:>9.1e} | "
               f"{o['sym_area_status']:>20}")
@@ -143,31 +140,31 @@ def main():
         print(f"  q={r['q']:>4}: " + ", ".join(str(f) for f in r["seq"]))
     print("-" * 104)
 
-    # q-independence of the exact sequence, and the saturation-onset value
+    # q-independence of the exact sequence, and the first-shell (onset) value
     seqs = [tuple(r["seq"]) for r in rows]
     q_independent = all(s == seqs[0] for s in seqs)
     onset = seqs[0][0]
     print(f"per-shell sequence q-independent across q={Q_LIST}: {q_independent}")
-    print(f"saturation-onset increment <|Delta A_c|>_(shell 1) = {onset}  (exact)")
+    print(f"first-shell (onset) increment <|Delta A_c|>_(shell 1) = {onset}  (exact)")
     # generator-set dependence: the onset 1/3 is the standard {+-X,+-Y} convention, NOT a generator invariant
     gd = onset_generator_dependence()
     print("onset vs symmetric generating set (q=61):  " + ";  ".join(f"{k} -> {v}" for k, v in gd.items()))
     print(f"  => onset is GENERATOR-SET DEPENDENT (1/3 is the standard campaign convention, not a generation/dim "
           f"invariant); only eps and the ADE ratio are generator-independent")
     inv_onset = 1 / onset                                  # Fraction
-    print(f"=> maximal-locking bound (onset)  theta_max = (2pi/q)*{onset} = 2pi/({inv_onset} q)")
+    print(f"=> maximal-locking bound at the onset shell  theta_max^(1) = (2pi/q)*{onset} = 2pi/({inv_onset} q)")
     na_geom_coeff = EPS_DICT * inv_onset / TWO_PI           # coefficient of q in N_A^geom = (1/10)/theta_max
     print()
     print("VERDICT (honest, no fit):")
-    print(" 1. SIGNED oriented Weil-BFS area = 0 identically: symmetric shell average vanishes (weil_bfs")
+    print(" 1. SIGNED central-phase mean = 0 identically: symmetric shell average vanishes (weil_bfs")
     print("    'vanishes_symmetric') AND directed-frontier signed mean = 0 (q11 max|theta_plus|=0), anti-bias = 0,")
     print("    sign-reversal consistent. => AAR honest outcome 4: capacity data do NOT select an oriented branch.")
-    print(" 2. ANGULAR COEFFICIENT CLOSED: the directed-frontier |Delta A_c| per-shell means are q-INDEPENDENT")
-    print(f"    EXACT rationals; the saturation-onset value is exactly {onset}. Hence the maximal-locking bound")
-    print(f"    (conditional on the CHO [H-orient] lock) is theta_max = 2pi/(3q) -- EXACT, q-independent, -> 0.")
-    print(f" 3. NOT a derivation of eps = 1/10. theta_max -> 0 with q; eps=1/10 would require the geometric Sym^2")
-    print(f"    normalisation N_A^geom = (1/10)/theta_max = (1/10)*(3q/2pi) = 3q/(20 pi) -- AAR section 5's 'last")
-    print("    open step', NOT supplied by the capacity data. The angular coefficient is closed (1/3); the")
+    print(" 2. ONSET COEFFICIENT: the directed-frontier |Delta A_c| per-shell means are q-INDEPENDENT")
+    print(f"    EXACT rationals; the first-shell (onset) value is exactly {onset}. Hence the maximal-locking bound at the onset shell")
+    print(f"    (conditional on the CHO [H-orient] lock) is theta_max^(1) = 2pi/(3q) -- exact, q-independent, -> 0. (The Ihat-normalised bound at n_3^obs = 2 is 2.114/q, 2.122/q, 2.118/q: not this value.)")
+    print(f" 3. NOT a derivation of eps = 1/10. theta_max -> 0 with q; eps=1/10 would require, at the onset shell, the geometric Sym^2")
+    print(f"    normalisation N_A^geom = (1/10)/theta_max^(1) = (1/10)*(3q/2pi) = 3q/(20 pi) -- AAR section 5's 'last")
+    print("    open step', NOT supplied by the capacity data. The onset coefficient is 1/3; the")
     print("    geometric normalisation is not. eps=1/10 stays gated, consistent with AOG lem:rigidity.")
     print("=" * 104)
     return rows

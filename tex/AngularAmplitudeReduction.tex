@@ -4,7 +4,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
 \usepackage{doi}
+\hypersetup{
+  unicode,
+  pdftitle={Angular Amplitude Reduction: the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade},
+  pdfauthor={Jérôme Beau}
+}
 
 \providecommand{\Sym}{\mathrm{Sym}}
 \providecommand{\End}{\mathrm{End}}
@@ -19,7 +25,7 @@ the Oriented Shear Product of the $\mathfrak{sl}(2)$ Step
 and the Central-Phase Observable of the Weil Cascade\\[2pt]
 \large (internal note, prior to the Weil--BFS computation)}
 \author{Cosmochrony programme --- working note}
-\date{\today}
+\date{2026}
 
 \begin{document}
   \maketitle
@@ -234,7 +240,7 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
     capacity observable contains both orientations and therefore erases the oriented
     angular component.
 
-    The numerical Weil--BFS check confirms this structure for
+    The numerical Weil--BFS check (\texttt{code/weil\_bfs\_angular\_area.py}) confirms this structure for
     $q\in\{61,101,151\}$.
     The radial profile $\sigma_{\mathrm{pair}}(n)$ is non-trivial and saturates through the
     frequency sector $B_c$, while the raw angular profile
@@ -260,8 +266,9 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
     \subsection{Capacity audit: symmetric obstruction and the onset central-phase coefficient}
       \label{subsec:capacity-audit}
 
-      The required-outputs computation has been run on the exact Weil-block pipeline for
-      $q\in\{61,101,151,211,307\}$, with two firm outcomes and no fit.
+      The required-outputs computation has been run on the exact Heisenberg--BFS frontier (the group law and
+      generators of the Weil-block construction of~\cite{Beau2026a16}; no Weil block enters the frontier rationals)
+      for $q\in\{61,101,151,211,307\}$, with two firm outcomes and no fit.
 
       First, the signed central-phase increment $A_c$ averages to zero identically.
       The symmetric shell average gives $\Theta_{\mathrm{raw}}=0$ (Section~\ref{sec:sym-cap-obstruction}), and the
@@ -277,41 +284,50 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
         \big(\langle|\Delta A_c|\rangle_{\partial^+}(m)\big)_{m\ge 1}
         = \Big( \tfrac13,\ \tfrac59,\ \tfrac23,\ \tfrac{10}{11},\ \tfrac{119}{109},\ \tfrac{239}{185},\ \dots \Big).
       \]
-      The saturation-onset value is exactly $\tfrac13$, so the maximal-locking central-phase bound (angular under the $A_c$ input) is closed exactly --- an
-      onset coefficient, not a loose bound,
+      The first-shell (onset) value is exactly $\tfrac13$, so the maximal-locking central-phase bound at the onset
+      shell (angular under the $A_c$ input) is exactly
       \[
-        \theta_{\max}
+        \theta_{\max}^{(1)}
         = \frac{2\pi}{q}\,\langle|\Delta A_c|\rangle_{\partial^+}\big|_{\mathrm{onset}}
-        = \frac{2\pi}{3q},
+        = \frac{2\pi}{3q}.
       \]
-      exact and $q$-independent in the coefficient $\tfrac13$.
+      The $\Ihat$-normalised bound at $n_3^{\mathrm{obs}}=2$ printed by the campaign script is $2.114/q$, $2.122/q$,
+      $2.118/q$ for $q=61,101,151$ ($0.9$--$1.3\,\%$ above the onset value, because it weights the second shell
+      $\tfrac59$ by $\Delta\Ihat(2)$), so $\tfrac13$ is an onset coefficient, not the value of the normalised bound at
+      $n_3^{\mathrm{obs}}$; it is exact and $q$-independent in the onset coefficient $\tfrac13$.
       This exact coefficient is a result of the standard $\{\pm X,\pm Y\}$ Cayley-frontier convention, not a
       generator-set invariant.
-      Changing the horizontal generating set changes the onset rational, so the closed $\tfrac13$ coefficient should be
+      Changing the horizontal generating set changes the onset rational, so the onset coefficient $\tfrac13$ should be
       read as the central-phase coefficient of this canonical campaign rather than as a generation-count or $\Sym^2$
       dimension invariant.
 
-      This closes the central-phase coefficient but not the amplitude.
-      Since $\theta_{\max}\to 0$ with $q$, it is not the dictionary value $\varepsilon=\tfrac1{10}$: the latter would
-      require the geometric $\Sym^2$ normalisation
+      This fixes the onset central-phase coefficient but not the amplitude.
+      Since $\theta_{\max}^{(1)}\to 0$ with $q$, it is not the dictionary value $\varepsilon=\tfrac1{10}$: the latter would
+      require, at the onset shell, the geometric $\Sym^2$ normalisation
       \[
         \mathcal{N}_A^{\mathrm{geom}}
-        = \frac{1/10}{\theta_{\max}}
+        = \frac{1/10}{\theta_{\max}^{(1)}}
         = \frac{3q}{20\pi},
       \]
       the deferred conversion factor of the preceding section, which the capacity data do not supply.
-      Thus the audit derives the standard-campaign central-phase coefficient $\tfrac13$, but leaves $\varepsilon=\tfrac1{10}$
+      Thus the audit derives the standard-campaign onset coefficient $\tfrac13$, but leaves $\varepsilon=\tfrac1{10}$
       gated by the geometric normalisation and, ultimately, by the generator-independent ADE / type-rigidity
       datum --- the orientation lock being itself conditional on the inherited central-phase
       branch~\cite{Beau2026cho}, and the residual value gated by the same type-rigidity as the spectral
       gate~\cite{Beau2026aog}.
 
       \paragraph{Reproducibility.}
-      The audit is exact: integer arithmetic for the frontier rational sequence, no fit.
-      The consolidator \texttt{simulation/fermionic-matter/front\_NA\_capacity\_audit.py} runs the two campaign
-      backends \texttt{q11\_oriented\_frontier.py} (directed signal and the maximal-locking bound) and
-      \texttt{weil\_bfs\_angular\_area.py} (symmetric central-phase mean) on the \texttt{spectral\_O12} pipeline, and prints the
-      obstruction table together with the $q$-independent exact per-shell rationals.
+      The per-shell rationals above are exact integer arithmetic in $\mathrm{Heis}_3(\mathbb{Z})$ and in
+      $\mathrm{Heis}_3(\mathbb{Z}/q\mathbb{Z})$, with no fit; for $q\ge 61$ the ball of radius $7$ of the Cayley graph
+      embeds in $\mathrm{Heis}_3(\mathbb{Z})$, which is why the sequence is $q$-independent over the first six shells.
+      They are recomputed from this repository alone by \texttt{code/frontier\_exact.py} (standard library only).
+      The vanishing of the symmetric-shell average (Section~\ref{sec:sym-cap-obstruction}) is reproduced by
+      \texttt{code/weil\_bfs\_angular\_area.py}, and the onset $\tfrac13$, its generator-set dependence and the
+      value $3q/(20\pi)$ by \texttt{code/front\_NA\_capacity\_audit.py} (see \texttt{README.md}).
+      The Heisenberg conventions are those of the exact Weil-block construction of~\cite{Beau2026a16}
+      (generators $\{\pm X,\pm Y\}$, law $(a,b,z)(a',b',z')=(a+a',b+b',z+z'+ab')$); the scripts carry them as a
+      local reference implementation, whose two functions are identical to those of \texttt{spectral\_O12}.
+      The campaign summaries (June 2026) are archived in \texttt{data/} with their provenance.
 
     \bibliographystyle{plain}
     \bibliography{cosmochrony-bibliography}

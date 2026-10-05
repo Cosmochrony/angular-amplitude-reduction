@@ -60,22 +60,25 @@ PDF_TMPL = "angular_area_q{q}.pdf"
 
 
 # --------------------------------------------------------------------------- #
-# Conventions: import from the project pipeline if available, else local fallback
+# Conventions: local reference implementation of the Heisenberg group law and generators
 # --------------------------------------------------------------------------- #
-try:
-    from spectral_O12 import build_generators as _build_generators
-    from spectral_O12 import heisenberg_mul_batch as _hmul_batch
-    PIPELINE = "spectral_O12"
-except Exception:
-    PIPELINE = "local-fallback"
+# Provenance: these are the Heisenberg conventions of the exact Weil-block construction of O12
+# (Cosmochrony/spectral-o12, spectral_O12.py: build_generators, heisenberg_mul_batch). The two local
+# functions below are identical, function by function, to those of spectral_O12 (same group law
+# (a,b,z)(a',b',z') = (a+a', b+b', z+z'+a*b') and same generating set {+-X, +-Y}; only the order of the
+# generator list differs, which no output depends on). The equivalence was verified against the June 2026
+# campaign summaries, which are reproduced to 1e-12 on every key. No external module is needed.
+PIPELINE = "heis3-local"
 
-    def _build_generators(q):
-        return [(1, 0, 0), (0, 1, 0), ((-1) % q, 0, 0), (0, (-1) % q, 0)]
 
-    def _hmul_batch(elts, s, q):
-        a, b, z = elts[:, 0], elts[:, 1], elts[:, 2]
-        sa, sb, sz = s
-        return np.stack([(a + sa) % q, (b + sb) % q, (z + sz + a * sb) % q], axis=1)
+def _build_generators(q):
+    return [(1, 0, 0), (0, 1, 0), ((-1) % q, 0, 0), (0, (-1) % q, 0)]
+
+
+def _hmul_batch(elts, s, q):
+    a, b, z = elts[:, 0], elts[:, 1], elts[:, 2]
+    sa, sb, sz = s
+    return np.stack([(a + sa) % q, (b + sb) % q, (z + sz + a * sb) % q], axis=1)
 
 
 def bfs_shells(q, n_max):
@@ -335,7 +338,7 @@ def _plot(agg):
     ax[2].axvline(agg["n_sat"], ls=":", color="grey")
     ax[2].set_title(r"$\Theta_{\rm Weil}(n)=\Theta_{\rm raw}/\widehat I$ (raw angle)")
     ax[2].set_xlabel("BFS depth $n$")
-    fig.suptitle(rf"Weil-BFS angular area $q={q}$ -- raw angle $\Theta_{{\rm Weil}}$ "
+    fig.suptitle(rf"Weil-BFS central-phase mean $q={q}$ -- raw angle $\Theta_{{\rm Weil}}$ "
                  r"(NOT $\varepsilon$; $\mathcal{N}_A$ unset)", fontsize=11)
     fig.tight_layout(rect=[0, 0, 1, 0.95])
     fig.savefig(PDF_TMPL.format(q=q))

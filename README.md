@@ -51,3 +51,26 @@ bash compile.sh
 
 Runs `pdflatex → bibtex → pdflatex → pdflatex` on `tex/AngularAmplitudeReduction.tex` and
 produces `out/AngularAmplitudeReduction.pdf`.
+
+## Reproduction
+
+Everything below runs from a clone of this repository alone (Python with `numpy`, `matplotlib`, `sympy`; see
+`code/requirements.txt`); no sibling repository and no external module is needed.
+
+```bash
+python code/frontier_exact.py                       # standard library only, seconds
+python code/weil_bfs_angular_area.py --mode full    # about 20 s; symmetric-shell mean Theta_raw = 0 for q = 61, 101, 151
+python code/front_NA_capacity_audit.py              # about 2.5 min; obstruction table, onset 1/3, 3q/(20 pi)
+python code/front_NAgeom_sym2_conversion.py         # exact symbolic checks
+python code/jpi_vs_phi_fingerprint.py
+```
+
+- `code/frontier_exact.py`: the per-shell rationals $\langle|\Delta A_c|\rangle_{\partial^+}(m) = \tfrac13, \tfrac59,
+  \tfrac23, \tfrac{10}{11}, \tfrac{119}{109}, \tfrac{239}{185}$ (first-shell onset value $\tfrac13$), their
+  independence of $q\in\{61,101,151,211,307\}$, and the vanishing of the signed frontier sums.
+- `code/q11_oriented_frontier.py` is a vendored copy of the script of the Q11OF repository.
+- The scripts write their outputs (`*.csv`, `*.json`, `*.pdf`, `*.jsonl`) in the current directory.
+- `data/`: the six June 2026 campaign summaries, with their provenance (`data/README.md`); the scripts regenerate
+  them to $10^{-12}$.
+- The Heisenberg conventions are the local reference functions of the scripts (identical to those of
+  `spectral_O12`, see the provenance comment in each script).

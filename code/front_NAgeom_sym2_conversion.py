@@ -1,7 +1,7 @@
 """Front N_A^geom: does Sym^2(C^2) intrinsically convert the frontier rational 1/3 into the spectral split 1/10?
 
 Bias-independent, exact symbolic (SymPy / exact rationals), no fit. Reduced target (Jerome): strip the trivial
-angle convention 2pi/q from N_A^geom = 3q/(20pi) = (q/2pi) * (3/10); the structural residue is
+angle convention 2pi/q from N_A^geom = 3q/(20pi) (at the first-shell onset) = (q/2pi) * (3/10); the structural residue is
 
     N_A,red^geom = eps / (onset) = (1/10) / (1/3) = 3/10,
 
@@ -73,13 +73,13 @@ def main():
     Hm = Em*Fm - Fm*Em
     dE, dF, dH = dsym2(Em), dsym2(Fm), dsym2(Hm)
     t, s_ = sp.symbols("t s")
-    area_to_J3 = sp.simplify(((t*s_/2)*(dE*dF - dF*dE))[0, 0] / (t*s_ * J3b[0, 0]))
+    shear_to_J3 = sp.simplify(((t*s_/2)*(dE*dF - dF*dE))[0, 0] / (t*s_ * J3b[0, 0]))
     checks["2_shear_product_to_J3_is_unity"] = ((dE*dF - dF*dE) == dH and dH == 2*J3b
                                                 and sp.simplify((t*s_/2)*(dE*dF - dF*dE) - t*s_*J3b) == sp.zeros(3, 3)
-                                                and area_to_J3 == 1)
+                                                and shear_to_J3 == 1)
 
     # ---- Step 3: the reduced residue and where R=3/2 enters --------------------------------------
-    onset = sp.Rational(1, 3)                              # exact frontier onset <|Delta A_c|>_d+ (Front N_A)
+    onset = sp.Rational(1, 3)                              # exact first-shell (onset) value <|Delta A_c|>_d+ (Front N_A)
     eps_dict = sp.Rational(1, 10)                          # ADE dictionary value
     N_red = eps_dict / onset                               # reduced geometric residue
     checks["3_reduced_is_3_over_10"] = (N_red == sp.Rational(3, 10))
@@ -116,7 +116,7 @@ def main():
     print(f"          J_3 = {nb['label']}:  <J3,J3>_HS = {nb['HS2']},  Spec = {nb['spec']}")
     print(f"          Sym^2(C^2) invariants available: weights {{0,+-1}}, <J3,J3>=2, dim 3,")
     print(f"          static covariance [1:1/2:1/2] (e_0/e_pm = 2).  -> pool = {{1, 2, 3, sqrt2, 1/2}}")
-    print(f"  Step 2  shear product->J_3 factor (AAR lem:area) = {area_to_J3}  (J_3 coeff = ts, leading order)")
+    print(f"  Step 2  shear product->J_3 factor (AAR lem:area) = {shear_to_J3}  (J_3 coeff = ts, leading order)")
     print(f"          level ratio R=(1/2+u)/(1/2-u)  =>  eps(R) = {out['eps_of_R']}")
     print(f"  Step 3  reduced residue  N_red = eps/onset = (1/10)/(1/3) = {N_red}")
     print(f"          N_red(R) = eps(R)/onset = {N_red_of_R}   (= 3(R-1)/(2(R+1)))")
@@ -137,7 +137,7 @@ def main():
     print("  but an irreducible ARITHMETIC factor: the prime 5 = 2(R+1)|_{R=3/2}, coprime to the Sym^2 pool {2,3} --")
     print("  the icosahedral/ADE signature (cf. the sqrt5 of AOG). So Sym^2 does NOT intrinsically convert 1/3 -> 1/10:")
     print("  front N_A^geom reduces to AOG lem:rigidity, SHARPENED to a single arithmetic object -- R=3/2, i.e. the")
-    print("  prime 5. The angular coefficient (1/3) and the norm conventions (2,3,sqrt2) are Sym^2; the 5 is the gate.")
+    print("  prime 5. The onset coefficient (1/3) and the norm conventions (2,3,sqrt2) are Sym^2; the 5 is the gate.")
     print("ALL CHECKS PASS" if allok else "SOME CHECKS FAILED")
     return allok
 

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you cite this work, please use the metadata from this file."
-title: "Angular Amplitude Reduction: Accumulated Oriented Symplectic Area of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
+title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl_2 Step and the Central-Phase Observable of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
 type: software
 authors:
   - family-names: "Beau"
@@ -11,7 +11,7 @@ doi: "10.5281/zenodo.20601228"
 license: "CC-BY-4.0"
 preferred-citation:
   type: article
-  title: "Angular Amplitude Reduction: Accumulated Oriented Symplectic Area of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
+  title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl_2 Step and the Central-Phase Observable of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
   authors:
     - family-names: "Beau"
       given-names: "Jérôme"

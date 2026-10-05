@@ -9,7 +9,7 @@ Working note (preprint), v1.3 (local candidate, not deposited; last deposited ve
 ## Abstract
 
 This internal note fixes the numerical observable for the absolute normalisation of the angular
-generation split of Q14 §6, before any Weil–BFS computation is written.
+generation split of Q14 §6, and reports the Weil–BFS computations of it (capacity audit of the last section).
 
 A short Baker–Campbell–Hausdorff reduction in $\mathfrak{sl}_2$ identifies the per-step
 $J_\Pi$-odd $J_3$ component of the metaplectic cascade generator with the oriented product $ts$ of
@@ -37,7 +37,7 @@ prior to $\mathcal{N}_A$.
 
 This note belongs to the **fermionic matter sub-programme** (Presentation Note 6). It is a
 companion note to Q14, refining the §6 open deliverable on the inter-generation splitting
-amplitude. It identifies, before computation, the precise Weil–BFS observable to be measured to
+amplitude. It identifies the precise Weil–BFS observable to be measured to
 test the dictionary value $\varepsilon = 1/10$. Together with the **projective-residue-schur**
 note (Schur form of the compression remainder, conditional generation reading and A4 reduction) and the
 **q11-oriented-frontier** note (front diagnostics), it sets up the locked frame in which the
@@ -67,7 +67,7 @@ python code/jpi_vs_phi_fingerprint.py
 
 - `code/frontier_exact.py`: the per-shell rationals $\langle|\Delta A_c|\rangle_{\partial^+}(m) = \tfrac13, \tfrac59,
   \tfrac23, \tfrac{10}{11}, \tfrac{119}{109}, \tfrac{239}{185}$ (first-shell onset value $\tfrac13$), their
-  independence of $q\in\{61,101,151,211,307\}$, and the vanishing of the signed frontier sums.
+  equality with the $H_3(\mathbb{Z})$ values for $q\in\{61,101,151,211,307\}$ (verified for the shells $m\le 6$ only), and the vanishing of the signed frontier sums.
 - `code/q11_oriented_frontier.py` is a vendored copy of the script of the Q11OF repository.
 - The scripts write their outputs (`*.csv`, `*.json`, `*.pdf`, `*.jsonl`) in the current directory.
 - `data/`: the six June 2026 campaign summaries, with their provenance (`data/README.md`); the scripts regenerate

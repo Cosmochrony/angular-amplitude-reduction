@@ -22,8 +22,7 @@
 
 \title{Angular Amplitude Reduction:
 the Oriented Shear Product of the $\mathfrak{sl}(2)$ Step
-and the Central-Phase Observable of the Weil Cascade\\[2pt]
-\large (internal note, prior to the Weil--BFS computation)}
+and the Central-Phase Observable of the Weil Cascade}
 \author{Cosmochrony programme --- working note}
 \date{2026}
 
@@ -32,7 +31,8 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
 
   \begin{abstract}
     This internal note fixes the numerical observable for the absolute normalisation of the angular
-    generation split of Q14, \S6~\cite{Beau2026q14}, before any Weil--BFS computation is written.
+    generation split of Q14, \S6~\cite{Beau2026q14}, and reports the Weil--BFS computations of it
+    (Section~\ref{subsec:capacity-audit}).
     A short Baker--Campbell--Hausdorff reduction in $\mathfrak{sl}_2$ identifies the per-step $J_\Pi$-odd $J_3$
     component of the metaplectic cascade generator with the oriented product $ts$ of the two shear parameters,
     produced by the $\mathfrak{sl}_2$ commutator $[E,F]=H$ (Q14, Proposition~6.5), and not with a free shear
@@ -180,7 +180,8 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
 
   \section{Required outputs and honest outcomes}
 
-    The Weil--BFS computation must return three quantities, not one:
+    The Weil--BFS computation is to return three quantities, not one (Section~\ref{subsec:capacity-audit} reports
+    what has been computed so far):
     \begin{enumerate}
       \item $K_{\mathrm{ar}}^{\mathrm{Weil}}(q)$ at the saturation rank, for $q \in \{61, 101, 151\}$;
       \item the profile $K_{\mathrm{ar}}^{\mathrm{Weil}}(n)$ (constant / saturating / $n_3$-concentrated),
@@ -277,7 +278,7 @@ and the Central-Phase Observable of the Weil Cascade\\[2pt]
       reversal.
       The capacity data alone therefore do not select an oriented branch.
 
-      Second, the absolute directed-frontier increment is a $q$-independent exact rational sequence.
+      Second, the absolute directed-frontier increment is an exact rational sequence, $q$-independent over the first six shells (see the paragraph on reproducibility below).
       With $c=1$, the per-shell mean $\langle|\Delta A_c|\rangle_{\partial^+}(m)$, computed by integer arithmetic, is
       identical for all five primes:
       \[

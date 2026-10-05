@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you cite this work, please use the metadata from this file."
-title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
+title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade"
 type: software
 version: "1.3"
 authors:
@@ -12,7 +12,7 @@ doi: "10.5281/zenodo.20601228"
 license: "CC-BY-4.0"
 preferred-citation:
   type: article
-  title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade (internal note, prior to the Weil–BFS computation)"
+  title: "Angular Amplitude Reduction: the Oriented Shear Product of the sl(2) Step and the Central-Phase Observable of the Weil Cascade"
   authors:
     - family-names: "Beau"
       given-names: "Jérôme"

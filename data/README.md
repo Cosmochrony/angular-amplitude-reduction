@@ -25,3 +25,9 @@ Provenance.
   them.
 - These files are data, not claims: the statements made in the note about them are listed in its
   Reproduction section (`README.md`) together with the exact scripts.
+- Scope of the generator-set correction (5 October 2026): the six summaries above are produced by
+  `weil_bfs_angular_area.py` and `q11_oriented_frontier.py`, which use only the standard generating set {+-X,+-Y}
+  (inverses with ab = 0, hence correct). They do not depend on the inverse computation of
+  `front_NA_capacity_audit.py::onset_generator_dependence`, which was the faulty one (inverse of (1,1,0) taken as
+  (q-1,q-1,0) instead of (q-1,q-1,1)); that function only prints. No file in `data/` changed; a fresh run of every script
+  reproduces them unchanged.

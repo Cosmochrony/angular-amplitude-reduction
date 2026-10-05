@@ -40,7 +40,7 @@ def _signed(v, q):
 
 
 def onset_generator_dependence(q=61):
-    """Shell-1 onset <|Delta A_c|>_d+ for several symmetric generating sets of Heis_3(Z/qZ).
+    """Shell-1 onset <|Delta A_c|>_d+ for several inverse-closed generating sets of Heis_3(Z/qZ).
 
     Demonstrates that the first-shell (onset) value 1/3 is the standard {+-X,+-Y} Cayley-frontier convention, NOT a
     generator-set invariant (and a fortiori not a generation-count / Sym^2-dimension invariant): changing the
@@ -75,13 +75,22 @@ def onset_generator_dependence(q=61):
                     cnt += 1
         return Fraction(num, cnt)
 
-    X, Xi, Y, Yi = (1, 0, 0), (q - 1, 0, 0), (0, 1, 0), (0, q - 1, 0)
+    def inv(g):
+        # group law (a,b,z)(a',b',z') = (a+a', b+b', z+z'+a b'): the inverse of (a,b,z) is (-a,-b,-z+ab),
+        # NOT (-a,-b,-z). (Corrected after the 2026-10-05 review: the two sets containing (1,1,0) previously used (q-1,q-1,0), which is not
+        # its inverse, so they were not inverse-closed.)
+        a, b, z = g
+        return ((-a) % q, (-b) % q, (a * b - z) % q)
+
+    X, Y, XY, X2 = (1, 0, 0), (0, 1, 0), (1, 1, 0), (2, 0, 0)
+    Xi, Yi, XYi, X2i = inv(X), inv(Y), inv(XY), inv(X2)
+    assert mul(XY, XYi) == (0, 0, 0) and mul(XYi, XY) == (0, 0, 0)
     sets = {
         "standard {+-X,+-Y}": [X, Xi, Y, Yi],
-        "{+-X,+-Y,+-(X+Y)}": [X, Xi, Y, Yi, (1, 1, 0), (q - 1, q - 1, 0)],
-        "{+-X,+-Y,+-2X}": [X, Xi, Y, Yi, (2, 0, 0), (q - 2, 0, 0)],
-        "{+-X,+-(X+Y)}": [X, Xi, (1, 1, 0), (q - 1, q - 1, 0)],
-        "{+-2X,+-Y}": [(2, 0, 0), (q - 2, 0, 0), Y, Yi],
+        "{+-X,+-Y,+-(X+Y)}": [X, Xi, Y, Yi, XY, XYi],
+        "{+-X,+-Y,+-2X}": [X, Xi, Y, Yi, X2, X2i],
+        "{+-X,+-(X+Y)}": [X, Xi, XY, XYi],
+        "{+-2X,+-Y}": [X2, X2i, Y, Yi],
     }
     return {name: onset(gens) for name, gens in sets.items()}
 
@@ -148,7 +157,7 @@ def main():
     print(f"first-shell (onset) increment <|Delta A_c|>_(shell 1) = {onset}  (exact)")
     # generator-set dependence: the onset 1/3 is the standard {+-X,+-Y} convention, NOT a generator invariant
     gd = onset_generator_dependence()
-    print("onset vs symmetric generating set (q=61):  " + ";  ".join(f"{k} -> {v}" for k, v in gd.items()))
+    print("onset vs inverse-closed generating set (q=61):  " + ";  ".join(f"{k} -> {v}" for k, v in gd.items()))
     print(f"  => onset is GENERATOR-SET DEPENDENT (1/3 is the standard campaign convention, not a generation/dim "
           f"invariant); only eps and the ADE ratio are generator-independent")
     inv_onset = 1 / onset                                  # Fraction

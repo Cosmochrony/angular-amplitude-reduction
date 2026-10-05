@@ -11,9 +11,11 @@ Three normalisations must be separated (else a missing norm convention masquerad
     (Weil central phase theta_A) -> (J_3 generator) -> (spectral split coeff on Sym^2(C^2)) -> (dictionary eps).
 
 Anchors (corpus, exact):
-  * AAR lem:area: the per-step J_3 coefficient IS the oriented symplectic area, [X,Y]=2J_3 => (ts/2)(2J_3)=ts J_3.
-    So the area->J_3 conversion is factor 1; the static covariance [1:1/2:1/2] and its factor 2 come from the
-    Carnot-degree-2 weight of Z=[X,Y] (Beau2026a34, Beau2026a33).
+  * AAR lem:area: the per-step J_3 coefficient is the oriented shear product ts of the sl_2 commutator,
+    [E,F]=H -> 2J_3 on Sym^2(C^2) => (ts/2)(2J_3)=ts J_3 to leading order (exact value ts*theta/sinh(theta), Q14 Prop 6.5).
+    So the shear-product->J_3 conversion is factor 1. Whether the Heisenberg central phase A_c carries this J_3 signal
+    is an INPUT of AAR, not a consequence of the lemma. The static covariance [1:1/2:1/2] and its factor 2 are
+    attributed by Beau2026a34, Beau2026a33 to the Carnot-degree-2 weight of the Heisenberg centre Z (not re-checked here).
   * PYO/PRS: the generation split is E_Pi^2|gen = diag(1, 1/2+u, 1/2-u), with u = eps the J_3 split coefficient.
   * FM-Note / AOG: the ADE case-selection gate fixes the LEVEL RATIO R = (1/2+eps)/(1/2-eps) = 3/2, whence
     5 eps = 1/2 and eps = 1/10. The "5" = 2(R+1) is the ADE-ratio signature.
@@ -42,8 +44,8 @@ def main():
     J3b = sp.diag(1, 0, -1)          # alternate labelling
     na, nb = j3_norms(J3a, "diag(0,1,-1)"), j3_norms(J3b, "diag(1,0,-1)")
     out["J3a"], out["J3b"] = na, nb
-    # the only Sym^2(C^2) numbers available: weights {0,+-1}; HS^2=2 (=Carnot degree 2); dim=3; static [1:1/2:1/2]
-    checks["1_HS2_is_2"] = (na["HS2"] == 2)                 # <J3,J3>=2 : the Carnot-2 factor
+    # the only Sym^2(C^2) numbers available: weights {0,+-1}; HS^2=2 (1+0+1, a Sym^2(C^2) fact); dim=3; static [1:1/2:1/2]
+    checks["1_HS2_is_2"] = (na["HS2"] == 2)                 # <J3,J3>=2 : (+1)^2+0+(-1)^2
     static_cov = [sp.Integer(1), sp.Rational(1, 2), sp.Rational(1, 2)]   # [1 : 1/2 : 1/2] covariance
     checks["1_static_cov_ratio_e0_over_epm_is_2"] = (static_cov[0] / static_cov[1] == 2)
 
@@ -54,9 +56,9 @@ def main():
     eps_of_R = sp.solve(sp.Eq(R_of_u, R), u)[0]            # eps as a function of the level ratio R
     checks["2_eps_of_R"] = sp.simplify(eps_of_R - (R - 1) / (2 * (R + 1))) == 0
     out["eps_of_R"] = sp.nsimplify(eps_of_R)
-    # area->J_3 conversion factor is 1 (AAR lem:area): the J_3 coefficient equals the oriented area directly.
+    # shear-product->J_3 conversion factor is 1 (AAR lem:area): the J_3 coefficient is ts to leading order.
     area_to_J3 = sp.Integer(1)
-    checks["2_area_to_J3_is_unity"] = (area_to_J3 == 1)
+    checks["2_shear_product_to_J3_is_unity"] = (area_to_J3 == 1)
 
     # ---- Step 3: the reduced residue and where R=3/2 enters --------------------------------------
     onset = sp.Rational(1, 3)                              # exact frontier onset <|Delta A_c|>_d+ (Front N_A)
@@ -94,9 +96,9 @@ def main():
     print(f"  Step 1  J_3 = {na['label']}:  <J3,J3>_HS = {na['HS2']},  Spec = {na['spec']},  "
           f"||J3||_op = {na['op']},  ||J3||_HS = {sp.nsimplify(na['HS'])}")
     print(f"          J_3 = {nb['label']}:  <J3,J3>_HS = {nb['HS2']},  Spec = {nb['spec']}")
-    print(f"          Sym^2(C^2) invariants available: weights {{0,+-1}}, <J3,J3>=2 (Carnot deg 2), dim 3,")
+    print(f"          Sym^2(C^2) invariants available: weights {{0,+-1}}, <J3,J3>=2, dim 3,")
     print(f"          static covariance [1:1/2:1/2] (e_0/e_pm = 2).  -> pool = {{1, 2, 3, sqrt2, 1/2}}")
-    print(f"  Step 2  area->J_3 factor (AAR lem:area) = {area_to_J3}  (J_3 coeff = oriented area, exact)")
+    print(f"  Step 2  shear product->J_3 factor (AAR lem:area) = {area_to_J3}  (J_3 coeff = ts, leading order)")
     print(f"          level ratio R=(1/2+u)/(1/2-u)  =>  eps(R) = {out['eps_of_R']}")
     print(f"  Step 3  reduced residue  N_red = eps/onset = (1/10)/(1/3) = {N_red}")
     print(f"          N_red(R) = eps(R)/onset = {N_red_of_R}   (= 3(R-1)/(2(R+1)))")
@@ -110,7 +112,7 @@ def main():
     print("=" * 104)
     print("VERDICT (honest, no fit):  OUTCOME 3 -- the residue is gated by the ADE level ratio, not Sym^2.")
     print("  N_red = 3/10 = 3(R-1)/(2(R+1)), R the spectral level ratio. Sym^2(C^2) DOES supply the norm conventions")
-    print("  unambiguously: the triplet (dim 3), J_3 with Spec {0,+-1}, <J3,J3>=2 (Carnot deg 2), static [1:1/2:1/2],")
+    print("  unambiguously: the triplet (dim 3), J_3 with Spec {0,+-1}, <J3,J3>=2, static [1:1/2:1/2],")
     print("  and the BI sqrt2 -- the multiplicative pool <2, 3, sqrt2>. What it does NOT supply is the split MAGNITUDE")
     print("  u (hence R): diag(1,1/2+u,1/2-u) is J_3-aligned for EVERY u, so the representation leaves u free; the")
     print("  value R=3/2 is external dynamical/ADE data. The obstruction is therefore not a missing norm convention")

@@ -1,4 +1,4 @@
-# Angular Amplitude Reduction — The $J_3$ Split as Accumulated Oriented Symplectic Area
+# Angular Amplitude Reduction — Accumulated Oriented Symplectic Area of the Weil Cascade
 
 J. Beau, Independent Researcher, France
 
@@ -14,7 +14,10 @@ generation split of Q14 §6, before any Weil–BFS computation is written.
 A short Baker–Campbell–Hausdorff reduction in $\mathfrak{sl}_2$ identifies the per-step
 $J_\Pi$-odd $J_3$ component of the metaplectic cascade generator with the oriented product $ts$ of
 the two shear parameters, produced by the $\mathfrak{sl}_2$ commutator $[E,F]=H$ (Q14,
-Proposition 6.5), and not with a free shear parameter; the Heisenberg bracket does not enter. The
+Proposition 6.5), and not with a free shear parameter. In the $\mathrm{SL}(2)$-on-$V$ model of Q14 the computation uses
+only the $\mathfrak{sl}_2$ relations and no Heisenberg bracket (PRS, lemma on the exact metaplectic
+opening); in the oscillator (Weil) realisation the $\mathfrak{sl}_2$ generators are quadratic in the
+Heisenberg generators, and no map between the two brackets is supplied. The
 observable proposed for the Weil–BFS cascade is the accumulated oriented central-phase increment
 $A_c$ of the Heisenberg lift, normalised by the projected capacity $\widehat{I}(n)$. That $A_c$
 carries the $J_3$ signal is an input of this note, not a consequence of the reduction: the increment
